@@ -184,15 +184,9 @@
       box-shadow: 0 12px 40px rgba(28,18,8,0.18);
     }
 
-    .photo-card img,
-    .photo-placeholder {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
     .photo-placeholder {
       background: linear-gradient(135deg, #e8d5b4 0%, #c8aa80 50%, #a87d55 100%);
+      width: 100%; height: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -279,7 +273,6 @@
       display: inline-block;
       animation: textWave 2s ease-in-out infinite;
     }
-    /* Creates individual delays for each letter to make a fluid wave */
     .hashtag-wave span:nth-child(1) { animation-delay: 0.0s; }
     .hashtag-wave span:nth-child(2) { animation-delay: 0.1s; }
     .hashtag-wave span:nth-child(3) { animation-delay: 0.2s; }
@@ -378,24 +371,33 @@
       max-width: 440px;
       margin: 0 auto 40px;
     }
+    
+    /* UPGRADED HIGH-VISIBILITY BUTTON */
     .rsvp-btn {
       display: inline-block;
-      padding: 15px 48px;
-      background: rgba(245,236,215,0.12);
-      border: 1.5px solid rgba(245,236,215,0.7);
-      color: var(--sand);
+      padding: 18px 52px;
+      background: var(--sand);
+      border: none;
+      color: var(--deep);
       font-family: 'Jost', sans-serif;
-      font-size: 0.8rem;
-      font-weight: 400;
+      font-size: 0.85rem;
+      font-weight: 500;
       letter-spacing: 0.32em;
       text-transform: uppercase;
       text-decoration: none;
-      border-radius: 2px;
-      transition: background 0.3s, border-color 0.3s;
+      border-radius: 4px;
+      box-shadow: 0 8px 24px rgba(28,18,8,0.25);
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), 
+                  box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1), 
+                  background-color 0.3s;
     }
     .rsvp-btn:hover {
-      background: rgba(245,236,215,0.25);
-      border-color: var(--sand);
+      background: #FFFFFF;
+      transform: translateY(-3px);
+      box-shadow: 0 14px 32px rgba(28,18,8,0.35);
+    }
+    .rsvp-btn:active {
+      transform: translateY(-1px);
     }
 
     /* ══════════════════════════════
@@ -424,11 +426,13 @@
       .reveal { opacity:1; transform:none; transition:none; }
       .accent-line { width:160px; transition:none; }
       .hashtag-wave span { animation: none; }
+      .rsvp-btn:hover { transform: none; box-shadow: none; }
     }
     @media (max-width: 520px) {
       #photos { padding: 48px 16px; gap: 14px; }
       .photo-card { width: 100%; max-width: 360px; }
       .countdown-row { gap: 18px; }
+      .rsvp-btn { width: 100%; max-width: 320px; padding: 18px 20px; }
     }
   </style>
 </head>
@@ -436,6 +440,7 @@
 
 <div id="progress-line"></div>
 
+<!-- ══ HERO ══ -->
 <section id="hero">
   <p class="eyebrow reveal">Save the Date</p>
   <h1 class="reveal reveal-delay-1">
@@ -453,6 +458,7 @@
   </div>
 </section>
 
+<!-- ══ PHOTO PAIR ══ -->
 <section id="photos">
   <div class="photo-card reveal">
     <div class="photo-placeholder">
@@ -468,6 +474,7 @@
   </div>
 </section>
 
+<!-- ══ DATE & COUNTDOWN ══ -->
 <section id="date-section">
   <p class="label reveal">The Date</p>
   <div class="big-date reveal reveal-delay-1">12 · 12 · 2026</div>
@@ -481,6 +488,7 @@
     <div class="countdown-box"><span class="num" id="cd-sec">—</span><span class="unit">Seconds</span></div>
   </div>
 
+  <!-- Animated Hashtag Wave -->
   <div class="hashtag-wave reveal reveal-delay-4">
     <span>#</span><span>s</span><span>r</span><span>e</span><span>i</span><span>l</span><span>2</span><span>6</span>
   </div>
@@ -492,6 +500,7 @@
   </svg>
 </div>
 
+<!-- ══ LOCATION BAND ══ -->
 <section id="location-band">
   <p class="eyebrow reveal">Where we'll celebrate</p>
   <h2 class="reveal reveal-delay-1">Kochi,<br>Kerala</h2>
@@ -504,6 +513,7 @@
   </svg>
 </div>
 
+<!-- ══ STORY ══ -->
 <section id="story">
   <div class="inner">
     <h2 class="reveal">With love, from London.</h2>
@@ -516,6 +526,7 @@
   </div>
 </section>
 
+<!-- ══ RSVP ══ -->
 <section id="rsvp">
   <p class="eyebrow reveal">You're invited</p>
   <h2 class="reveal reveal-delay-1"><em>We hope<br>you'll be there.</em></h2>
@@ -530,6 +541,7 @@
   </a>
 </section>
 
+<!-- ══ FOOTER ══ -->
 <footer>
   <span class="monogram">S &amp; N</span>
   12 · 12 · 2026 &nbsp;·&nbsp; Kochi, Kerala &nbsp;·&nbsp; #sreil26
@@ -564,7 +576,6 @@
 
   // ── LIVE COUNTDOWN WITH SECONDS ──
   function updateCountdown() {
-    // Year, Month (11 = Dec), Day, Hour, Minute
     const target = new Date(2026, 11, 12, 10, 0, 0).getTime();
     const now = new Date().getTime();
     const diff = target - now;
@@ -574,7 +585,6 @@
     const minElement = document.getElementById('cd-min');
     const secElement = document.getElementById('cd-sec');
 
-    // Safety check
     if (!daysElement || !hrsElement || !minElement || !secElement) return;
 
     if (diff <= 0) {
@@ -585,20 +595,17 @@
       return;
     }
 
-    // Time calculations
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-    // Displaying values with clean two-digit padding
     daysElement.textContent = days;
     hrsElement.textContent  = String(hours).padStart(2, '0');
     minElement.textContent  = String(minutes).padStart(2, '0');
     secElement.textContent  = String(seconds).padStart(2, '0');
   }
 
-  // Run immediately and update every 1 second
   updateCountdown();
   setInterval(updateCountdown, 1000);
 </script>
