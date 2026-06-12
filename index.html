@@ -387,7 +387,7 @@
     }
 
     /* ══════════════════════════════
-       STORY
+       STORY / INFO
      ══════════════════════════════ */
     #story {
       background: var(--sand);
@@ -498,7 +498,7 @@
     @media (max-width: 768px) {
       .nav-bar { padding: 0 20px; }
       .nav-links { gap: 16px; }
-      .nav-links a:not(.nav-rsvp-btn) { display: none; } /* Keeps only the RSVP button active on mobile screens */
+      .nav-links a:not(.nav-rsvp-btn) { display: none; } /* Keeps only the RSVP button on tablet/mobile screens */
     }
     @media (max-width: 520px) {
       #photos { padding: 48px 16px; gap: 14px; }
@@ -512,15 +512,16 @@
 
 <div id="progress-line"></div>
 
+<!-- ══ FLOATING NAVIGATION MENU ══ -->
 <nav class="nav-bar" id="navBar">
   <a href="#hero" class="nav-logo">S &amp; N</a>
   <div class="nav-links">
     <a href="#date-section">The Date</a>
-    <a href="#story">Our Story</a>
     <a href="#rsvp" class="nav-rsvp-btn">RSVP</a>
   </div>
 </nav>
 
+<!-- ══ HERO ══ -->
 <section id="hero">
   <p class="eyebrow reveal">Save the Date</p>
   <h1 class="reveal reveal-delay-1">
@@ -538,15 +539,17 @@
   </div>
 </section>
 
+<!-- ══ PHOTO PAIR ══ -->
 <section id="photos">
   <div class="photo-card reveal">
-    <img src="us.jpg" alt="Srushti and Neil Photo 1" />
+    <img src="photo1.jpg" alt="Srushti and Neil Photo 1" />
   </div>
   <div class="photo-card reveal reveal-delay-2">
     <img src="photo2.jpg" alt="Srushti and Neil Photo 2" />
   </div>
 </section>
 
+<!-- ══ DATE & COUNTDOWN ══ -->
 <section id="date-section">
   <p class="label reveal">The Date</p>
   <div class="big-date reveal reveal-delay-1">12 · 12 · 2026</div>
@@ -560,6 +563,7 @@
     <div class="countdown-box"><span class="num" id="cd-sec">—</span><span class="unit">Seconds</span></div>
   </div>
 
+  <!-- Animated Hashtag Wave -->
   <div class="hashtag-wave reveal reveal-delay-4">
     <span>#</span><span>s</span><span>r</span><span>e</span><span>i</span><span>l</span><span>2</span><span>6</span>
   </div>
@@ -571,6 +575,7 @@
   </svg>
 </div>
 
+<!-- ══ LOCATION BAND ══ -->
 <section id="location-band">
   <p class="eyebrow reveal">Where we'll celebrate</p>
   <h2 class="reveal reveal-delay-1">Kochi,<br>Kerala</h2>
@@ -583,6 +588,7 @@
   </svg>
 </div>
 
+<!-- ══ INFO SECTION ══ -->
 <section id="story">
   <div class="inner">
     <h2 class="reveal">With love, from London.</h2>
@@ -595,6 +601,7 @@
   </div>
 </section>
 
+<!-- ══ RSVP ══ -->
 <section id="rsvp">
   <p class="eyebrow reveal">You're invited</p>
   <h2 class="reveal reveal-delay-1"><em>We hope<br>you'll be there.</em></h2>
@@ -609,6 +616,7 @@
   </a>
 </section>
 
+<!-- ══ FOOTER ══ -->
 <footer>
   <span class="monogram">S &amp; N</span>
   12 · 12 · 2026 &nbsp;·&nbsp; Kochi, Kerala &nbsp;·&nbsp; #sreil26
